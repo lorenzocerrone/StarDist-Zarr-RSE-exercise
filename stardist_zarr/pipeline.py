@@ -5,6 +5,7 @@ from skimage.metrics import contingency_table
 from skimage.morphology import remove_small_objects
 
 from csbdeep.utils import normalize
+from scipy.ndimage import zoom
 from stardist.models import StarDist2D
 from stardist_zarr.io import load_image_from_zarr, create_image_to_zarr
 
@@ -102,7 +103,10 @@ def stardist2D_stacked(file_infos: dict,
 
     # save results to zarr
     label_key = f'{file_infos["plate_to_segment"]}/labels/{file_infos.get("output_name", "nuclei_stardist")}'
-    create_image_to_zarr(pred_seg,
-                         image_path=file_infos['path'],
-                         key=label_key,
-                         resolution=0)
+    for i in range(4):
+        create_image_to_zarr(pred_seg,
+                             image_path=file_infos['path'],
+                             key=label_key,
+                             resolution=i)
+
+        pred_seg = zoom(pred_seg, (1, 0.5, 0.5), order=0)
