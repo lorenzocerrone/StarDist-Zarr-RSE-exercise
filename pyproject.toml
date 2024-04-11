@@ -1,0 +1,15 @@
+[project]
+name = "stadist_zarr"
+description = "A Python library for segmenting 3D nuclei using stardist 2D"
+requires-python = ">=3.8"
+version = "0.0.1"
+authors = [{name = "Lorenzo Cerrone", email = "lorenzo.cerrone@gmail.com"}]
+dependencies = [
+    "numpy",
+    "scikit-image",
+    "tensorflow[and-cuda]",
+    "stardist",
+    "zarr",
+]
+
+
