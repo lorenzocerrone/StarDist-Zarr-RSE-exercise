@@ -22,8 +22,13 @@ def get_image_shape(image_path: Path, key='raw'):
         return f[key].shape
 
 
-def create_image_to_zarr(image: np.ndarray, image_path, key='raw', metadata=None, mode='a'):
+def create_image_to_zarr(image: np.ndarray,
+                         image_path,
+                         key='raw',
+                         resolution: int = 0,
+                         metadata=None, mode='a'):
     z = zarr.open(image_path, mode=mode)
+    key = f'{key}/{resolution}'
     z.create_dataset(key, data=image, compression='gzip', overwrite=True)
     if metadata is not None:
         z.attrs.update(metadata)
