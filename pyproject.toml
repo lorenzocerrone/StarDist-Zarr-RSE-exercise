@@ -7,7 +7,7 @@ authors = [{name = "Lorenzo Cerrone", email = "lorenzo.cerrone@gmail.com"}]
 dependencies = [
     "numpy",
     "scikit-image",
-    "tensorflow[and-cuda]",
+    # "tensorflow[and-cuda]", this was not working on my machine so I had to install tensorflow and tensorflow-gpu separately via conda
     "stardist",
     "zarr",
 ]

@@ -8,6 +8,9 @@ pipeline:
   model_name: 2D_versatile_fluo
   min_size: 1000
   threshold: 0.5
+  ## Secondary {Optional} parameters
+  image_normalization_kwargs:
+    pmax: 90
 
 
 

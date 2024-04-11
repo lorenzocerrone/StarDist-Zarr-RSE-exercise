@@ -1,7 +1,10 @@
 import argparse
-from pathlib import Path
-import yaml
 import json
+import time
+from pathlib import Path
+
+import yaml
+
 from stardist_zarr.pipeline import stardist2D_stacked
 
 
@@ -28,8 +31,13 @@ def main():
     config = get_config()
     assert 'input_files' in config, "Key 'input_files' missing in config"
     assert 'pipeline' in config, "Key 'pipeline' missing in config"
+
     for file_infos in config['input_files']:
+        timer = time.time()
+        assert 'path' in file_infos, "Key 'path' missing in file_infos"
+        print(f"Processing file {file_infos['path']}")
         stardist2D_stacked(file_infos, **config['pipeline'])
+        print(f" - Processing file {file_infos['path']} took {time.time() - timer:.2f} seconds")
 
 
 if __name__ == '__main__':

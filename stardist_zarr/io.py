@@ -1,6 +1,7 @@
-import zarr
-import numpy as np
 from pathlib import Path
+
+import numpy as np
+import zarr
 
 
 def load_image_from_zarr(image_path: Path | str,
@@ -8,7 +9,6 @@ def load_image_from_zarr(image_path: Path | str,
                          resolution: int = 0,
                          channel: int = 0,
                          slices: tuple[slice, ...] = None):
-
     image_path = Path(image_path).absolute()
     assert image_path.exists(), f"Image file {image_path} does not exist"
 
@@ -17,9 +17,12 @@ def load_image_from_zarr(image_path: Path | str,
     return file
 
 
-def get_image_shape(image_path: Path, key='raw'):
+def get_image_shape(image_path: Path | str,
+                    key='raw',
+                    resolution: int = 0,
+                    channel: int = 0) -> tuple[int, int, int]:
     with zarr.open(str(image_path), 'r') as f:
-        return f[key].shape
+        return f[key][resolution][channel].shape
 
 
 def create_image_to_zarr(image: np.ndarray,
