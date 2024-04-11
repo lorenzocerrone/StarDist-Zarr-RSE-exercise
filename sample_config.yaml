@@ -1,0 +1,15 @@
+input_files:
+  - path: "./20200812-CardiomyocyteDifferentiation14-Cycle1.zarr"
+    plate_to_segment: "B/03/0"
+    target_channel: 0
+    output_name: "nuclei_stadist"
+
+pipeline:
+  model_name: 2D_versatile_fluo
+  min_size: 1000
+  threshold: 0.5
+
+
+
+
+
