@@ -72,3 +72,6 @@ stardist2D_stacked(input_config,
                    threshold=0.5,
                    )
 ```
+
+### Example output
+![image](result_exaple.png)
